@@ -1,6 +1,11 @@
 require_relative '../lib/gilded_rose'
+require_relative '../lib/base_component'
+require_relative '../lib/aged_brie'
+require_relative '../lib/backstage_passes'
+require_relative '../lib/conjured'
+require_relative '../lib/sulfuras'
 
-describe "#update_quality" do
+describe "GildedRose" do
 
   context "with a single item" do
     let(:initial_sell_in) { 5 }
@@ -8,7 +13,7 @@ describe "#update_quality" do
     let(:name) { "item" }
     let(:item) { Item.new(name, initial_sell_in, initial_quality) }
 
-    before { update_quality([item]) }
+    before { GildedRose.update_single_item(item) }
 
     context 'item is "NORMAL ITEM"' do
       let(:name) { "NORMAL ITEM" }
@@ -465,7 +470,7 @@ describe "#update_quality" do
       ]
     }
 
-    before { update_quality(items) }
+    before { GildedRose.update_items(items) }
 
     it 'degrades the quality of normal item' do
       expect(items[0].quality).to eq 9
