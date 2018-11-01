@@ -4,6 +4,11 @@ def update_quality(items)
       if item.quality > 0
         if item.name != 'Sulfuras, Hand of Ragnaros'
           item.quality -= 1
+          if item.name == 'Conjured'
+            if item.quality > 0
+              item.quality -= 1
+            end
+          end
         end
       end
     else
@@ -32,6 +37,11 @@ def update_quality(items)
           if item.quality > 0
             if item.name != 'Sulfuras, Hand of Ragnaros'
               item.quality -= 1
+              if item.name == 'Conjured'
+                if item.quality > 0
+                  item.quality -= 1
+                end
+              end
             end
           end
         else
