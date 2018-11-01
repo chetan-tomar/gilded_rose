@@ -1,4 +1,3 @@
-require 'item_helpers'
 require 'require_all'
 
 class BaseComponent
@@ -13,11 +12,11 @@ class BaseComponent
   end
 
   def update_quality
-    degrades_quality(item)
+    degrades_quality
   end
 
   def update_sell_in
-    degrades_sell_in(item)
+    degrades_sell_in
   end
 
   private
@@ -26,7 +25,7 @@ class BaseComponent
   # above 50, however `Sulfuras` is a legendary item and as such its
   # `quality` is 80 and it never alters.
 
-  def degrades_quality(item, number = 1)
+  def degrades_quality(number = 1)
     number = update_by_number(item.sell_in, number)
     item.quality -= number
     item.quality = MIN_QUALITY if item.quality < MIN_QUALITY
@@ -39,7 +38,7 @@ class BaseComponent
     item.quality = MAX_QUALITY if item.quality > MAX_QUALITY
   end
 
-  def degrades_sell_in(item, number = 1)
+  def degrades_sell_in(number = 1)
     item.sell_in -= number
   end
 

@@ -1,3 +1,5 @@
+require 'base_component'
+
 # README.md => `Aged Brie` actually increases in `quality` the older it gets
 
 class AgedBrie < BaseComponent
