@@ -347,6 +347,114 @@ describe "#update_quality" do
       end
     end
 
+    context 'item is "Conjured"' do
+      let(:name) { "Conjured" }
+
+      context 'when quality is 0' do
+        let(:initial_quality) { 0 }
+
+        context 'sell date not passed' do
+          it 'does not decrease the quality' do
+            expect(item.quality).to eq 0
+          end
+          
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq 4
+          end
+        end
+
+        context 'sell date passed' do
+          let(:initial_sell_in) { -1 }
+
+          it 'does not decrease the quality' do
+            expect(item.quality).to eq 0
+          end
+
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq(-2)
+          end
+        end
+      end
+
+      context 'when quality is 1' do
+        let(:initial_quality) { 1 }
+
+        context 'sell date not passed' do
+          it 'decreases the quality by 1' do
+            expect(item.quality).to eq 0
+          end
+
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq 4
+          end
+        end
+
+        context 'sell date passed' do
+          let(:initial_sell_in) { -1 }
+
+          it 'decreases the quality by 1' do
+            expect(item.quality).to eq 0
+          end
+
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq(-2)
+          end
+        end
+
+      end
+
+      context 'when quality is or less than 50' do
+        context 'sell date not passed' do
+          it 'decreases the quality by 2' do
+            expect(item.quality).to eq 8
+          end
+
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq 4
+          end
+        end
+
+        context 'sell date passed' do
+          let(:initial_sell_in) { -1 }
+
+          it 'decreases the quality by 4' do
+            expect(item.quality).to eq 6
+          end
+
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq(-2)
+          end
+        end
+
+      end
+
+      context 'when quality is more than 50' do
+        let(:initial_quality) { 55 }
+
+        context 'sell date not passed' do
+          it 'decreases quality to 50' do
+            expect(item.quality).to eq 53
+          end
+
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq 4
+          end
+        end
+
+        context 'sell date passed' do
+          let(:initial_sell_in) { -1 }
+
+          it 'decreases the quality to 50' do
+            expect(item.quality).to eq 51
+          end
+
+          it 'decreases sell in days by 1' do
+            expect(item.sell_in).to eq(-2)
+          end
+        end
+
+      end
+    end
   end
 
   context "with multiple items" do
